@@ -1,0 +1,61 @@
+name: magiclink
+description: Description of magiclink
+
+classes:
+  link_storage:
+    - name: link
+      type: text
+
+    - name: email
+      type: string
+
+    - name: status
+      type: string
+
+    - name: token
+      type: string
+endpoints:
+  login:
+    description:
+    file: scripts/login.js
+    parameters:
+      email:
+        type: string
+        description: "Email to login user"
+        example: "jon.doe@doe.com"
+    response:
+      mimetype: text/plain
+      examples:
+        -
+          exit_code: 200
+          description: Success
+          example: "Waiting for magiclink"
+        -
+          exit_code: 400
+          description: Failed
+          example: No email or status provided
+  verify:
+    description: "Socket used to verify user token inside database"
+    file: scripts/verify.js
+    parameters: 
+      token:
+        type: string
+        description: "user uid"
+        example: "4fdasf#$#()adsczx"
+      status:
+        type: string
+        description: "status of user login"
+        example: "allow/disallow"
+    response:
+      mimetype: application/json
+      examples:
+        - 
+          exit_code: 200
+          description: Success
+          example: "https://magiclink.com/?email=joe.doe@doe.com&uid=dsakjd!@dkjJKSsda$$#12&status=allow"
+        -
+          exit_code: 400
+          description: Failed
+          example: Something went wrong
+
+  
