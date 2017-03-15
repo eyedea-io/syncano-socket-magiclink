@@ -1,35 +1,40 @@
-const randToken = require('rand-token');
 const server = require('syncano-server').default;
-const generate = require('./helpers/generators')
+
+const randToken = require('rand-token');
+const generate = require('./helpers/generators');
+const verify = require('./helpers/verify');
+
+
 const uid = randToken.uid;
 const token = uid(16);
 
 const email = ARGS.email;
 
-const { data } = server();
+let { data, socket, users } = server();
 
-data['link_storage'].list().then(users => {
-	const found = users.find(user => {
-		return user.email === email;
-	})
-	if (found) {
-		// IMPLEMENT VERIFY HERE
-		console.log(users);
-	} else {
-		const link = generate.link(email, token);
-
-		data['link_storage'].create({
-			link,
+const createUser = () => {
+	const link = generate.link(email, token, 'allow');
+	users.create({
+			username: email,
+			password: token,
 			email,
+			token,
 			status: 'disallow',
-			token
+			link
 		}).then(data => {
-			setResponse(new HttpResponse(200, JSON.stringify(`User created with email: ${data.link}`), 'text/plain'));
+			setResponse(new HttpResponse(200, JSON.stringify(data), 'application/json'));
+			console.log(data);
 		}).catch(err => {
-			setResponse(new HttpResponse(200, JSON.stringify(`${err}`), 'text/plain'));
-		})
-	}
-}).catch(err => {
-	console.error(err);
-});
+			setResponse(new HttpResponse(400, JSON.stringify(err), 'application/json'));
+		});
+};
+const authenticateUser = () => {
+	verify(email, token, id);	
+}
 
+users.where('username', 'eq', email)
+	.firstOrFail()
+	.then(user => {
+		verify(email, token, user.id, user.user_key);
+	})
+	.catch(createUser);

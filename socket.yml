@@ -2,18 +2,18 @@ name: magiclink
 description: Description of magiclink
 
 classes:
-  link_storage:
-    - name: link
-      type: text
-
+  user_profile:
     - name: email
+      type: string
+    
+    - name: token
       type: string
 
     - name: status
       type: string
 
-    - name: token
-      type: string
+    - name: link
+      type: text
 endpoints:
   login:
     description:

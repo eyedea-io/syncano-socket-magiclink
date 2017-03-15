@@ -48,8 +48,8 @@ regenerator-runtime@^0.10.0:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.3.tgz#8c4367a904b51ea62a908ac310bf99ff90a82a3e"
 
-syncano-server@^0.7.2-29:
-  version "0.7.2-29"
-  resolved "https://registry.yarnpkg.com/syncano-server/-/syncano-server-0.7.2-29.tgz#bb752decba54f889b8399241f30fbedeb7d8e3e0"
+syncano-server@^0.7.2-30:
+  version "0.7.2-33"
+  resolved "https://registry.yarnpkg.com/syncano-server/-/syncano-server-0.7.2-33.tgz#3e6a5e1a8291c3ec41c3e9b2e8adee922044c3ef"
   dependencies:
     node-fetch "2.0.0-alpha.3"
