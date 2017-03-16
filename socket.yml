@@ -5,7 +5,7 @@ classes:
   user_profile:
     - name: email
       type: string
-    
+
     - name: token
       type: string
 
@@ -14,6 +14,22 @@ classes:
 
     - name: link
       type: text
+  magiclink:
+    - name: email
+      type: string
+      filter_index: true
+
+    - name: token
+      type: string
+
+    - name: status
+      type: string
+
+    - name: link
+      type: text
+
+    - name: valid_until
+      type: string
 endpoints:
   login:
     description:
@@ -37,7 +53,7 @@ endpoints:
   verify:
     description: "Socket used to verify user token inside database"
     file: scripts/verify.js
-    parameters: 
+    parameters:
       token:
         type: string
         description: "user uid"
@@ -49,7 +65,7 @@ endpoints:
     response:
       mimetype: application/json
       examples:
-        - 
+        -
           exit_code: 200
           description: Success
           example: "https://magiclink.com/?email=joe.doe@doe.com&uid=dsakjd!@dkjJKSsda$$#12&status=allow"
@@ -58,4 +74,4 @@ endpoints:
           description: Failed
           example: Something went wrong
 
-  
+

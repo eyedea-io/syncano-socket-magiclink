@@ -1,40 +1,44 @@
 const server = require('syncano-server').default;
 
-const randToken = require('rand-token');
-const generate = require('./helpers/generators');
 const verify = require('./helpers/verify');
-
-
-const uid = randToken.uid;
-const token = uid(16);
+const MagicLink = require('./helpers/magiclink');
 
 const email = ARGS.email;
 
-let { data, socket, users } = server();
+const { data, users } = server();
+//token status link do magiclink class
+//valid until - w klasie
+const magiclink = (new MagicLink(email));
+const createMagicLink = () => {
+    const link = {
+      link: magiclink.generateLink(META.instance),
+      valid_until: magiclink.getValid(),
+      token: magiclink.getToken(),
+      email
+    }
+    data.magiclink.create(link)
+    .then(()=>{})
+    .catch(err => {
+      setResponse(new HttpResponse(200, JSON.stringify(err), 'application/json'));
+    });
+}
 
 const createUser = () => {
-	const link = generate.link(email, token, 'allow');
-	users.create({
-			username: email,
-			password: token,
-			email,
-			token,
-			status: 'disallow',
-			link
-		}).then(data => {
-			setResponse(new HttpResponse(200, JSON.stringify(data), 'application/json'));
-			console.log(data);
-		}).catch(err => {
-			setResponse(new HttpResponse(400, JSON.stringify(err), 'application/json'));
-		});
+  users.create({
+      username: email,
+      password: magiclink.getToken(),
+    }).then(createMagicLink).catch(err => {
+      setResponse(new HttpResponse(400, JSON.stringify(err), 'application/json'));
+    });
 };
+
 const authenticateUser = () => {
-	verify(email, token, id);	
+	verify(email, token, id);
 }
 
 users.where('username', 'eq', email)
 	.firstOrFail()
 	.then(user => {
-		verify(email, token, user.id, user.user_key);
+		verify(email);
 	})
 	.catch(createUser);
