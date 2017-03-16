@@ -1,7 +1,9 @@
 const server = require('syncano-server').default;
 const moment = require('moment');
+const MagicLink = require('./helpers/magiclink');
 const email = ARGS.email;
 const status = ARGS.status;
+const token = ARGS.token
 const { users, data } = server();
 
 const hasExpired = (valid_until) => {
@@ -16,7 +18,7 @@ const hasExpired = (valid_until) => {
     } else {
       return false;
     }
-  }
+}
 
 users.where('username', 'eq', email)
 	.firstOrFail()
@@ -24,8 +26,9 @@ users.where('username', 'eq', email)
     data.magiclink.where('email', email)
       .firstOrFail()
       .then(link => {
-        if(!hasExpired(link.valid_until)){
-          data.magiclink.update(link.id, {
+        const _link = link;
+        if(!hasExpired(_link.valid_until) && token === _link.token){
+          data.magiclink.update(_link.id, {
             status: 'allow',
           }).then(data => {
             setResponse(new HttpResponse(200, JSON.stringify(data.status), 'application/json'));
@@ -33,24 +36,9 @@ users.where('username', 'eq', email)
             console.log(err);
           })
         } else {
-          setResponse(new HttpResponse(200, JSON.stringify({message: 'Link has expired'}), 'application/json'));
+          setResponse(new HttpResponse(400, JSON.stringify({message: 'Link has expired or you provided invalid Token'}), 'application/json'));
         }
       });
-
-		// if(user.token === token) {
-		// 	users.update(user.id, {
-		// 	status
-		// 	}).then(data => {
-		// 		setResponse(new HttpResponse(200, JSON.stringify(data), 'application/json'));
-		// 	}).catch(err => {
-		// 		setResponse(new HttpResponse(400, JSON.stringify('err')));
-		// 	});
-		// } else {
-		// 	setResponse(new HttpResponse(200, JSON.stringify({message: 'Token has expired'}), 'application/json'));
-		// }
 	}).catch(err =>{
 		setResponse(new HttpResponse(400, JSON.stringify(err), 'application/json'));
 	})
-
-
-
