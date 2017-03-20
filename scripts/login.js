@@ -1,17 +1,21 @@
 const server = require('syncano-server').default;
-
-const verify = require('./helpers/verify');
+const verify = require('./helpers/confirm');
+const sendEmail = require('./helpers/mailgun').sendEmail;
 const MagicLink = require('./helpers/magiclink');
 
 const email = ARGS.email;
 
+const magiclink = new MagicLink(email);
+
+
 const { data, users } = server();
+
 const updateMagicLink = (_email) => {
   data.magiclink.where('email', _email)
     .firstOrFail()
     .then(link => {
       const _link = link;
-      const magiclink = (new MagicLink(email));
+      const magiclink = new MagicLink(email);
       const linkUpdate = {
         link: magiclink.generateLink(META.instance),
         valid_until: magiclink.getValid(),
@@ -19,10 +23,11 @@ const updateMagicLink = (_email) => {
         email
       }
       data.magiclink.update(_link.id, linkUpdate).then(link => {
-        //SEND EMAIL WITH NEW LINK HERE
-        console.log(link.link);
+        const { email } = link;
+        const sendTo = email;
+        sendEmail(sendTo, link.link);
       }).catch(err => {
-        console.log(err);
+        setResponse(new HttpResponse(400, JSON.stringify(err), 'application/json'));
       });
     })
     .catch(err => {
@@ -30,7 +35,6 @@ const updateMagicLink = (_email) => {
     })
 }
 const createMagicLink = () => {
-  const magiclink = (new MagicLink(email));
   const link = {
     link: magiclink.generateLink(META.instance),
     valid_until: magiclink.getValid(),
@@ -65,6 +69,7 @@ users.where('username', 'eq', email)
     .then(link => {
       const _link = link;
       updateMagicLink(_link.email);
+
     }).catch(err => {
       setResponse(new HttpResponse(400, JSON.stringify(err)));
     })

@@ -1,9 +1,10 @@
 const moment = require('moment');
 const randToken = require('rand-token');
-
+const crypto = require('crypto');
+// var token = crypto.randomBytes(16).toString('hex');
 class MagicLink  {
   constructor(email, status) {
-    this.token = randToken.uid(16);
+    this.token = crypto.randomBytes(16).toString('hex');
     this.email = email;
     this.now = new moment().format("HH:mm");
     this.valid_until = new moment().add('15', 'minutes').format("HH:mm").toString();
@@ -31,7 +32,7 @@ class MagicLink  {
     return this.token;
   }
   generateLink(instance) {
-    return `https://${instance}.syncano.space/magiclink/verify/?email=${this.email}&token=${this.token}`
+    return `https://${instance}.syncano.space/magiclink/confirm/?email=${this.email}&token=${this.token}`
   }
 }
 

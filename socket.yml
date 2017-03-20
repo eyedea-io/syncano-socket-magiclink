@@ -1,6 +1,15 @@
 name: magiclink
 description: Description of magiclink
 
+config:
+  MAILGUN_API_KEY:
+    required: true
+
+  MAILGUN_DOMAIN_NAME:
+    required: true
+
+  FROM:
+    required: true
 classes:
   user_profile:
     - name: email
@@ -50,9 +59,9 @@ endpoints:
           exit_code: 400
           description: Failed
           example: No email or status provided
-  verify:
+  confirm:
     description: "Socket used to verify user token inside database"
-    file: scripts/verify.js
+    file: scripts/confirm.js
     parameters:
       token:
         type: string

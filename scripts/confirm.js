@@ -1,9 +1,10 @@
 const server = require('syncano-server').default;
 const moment = require('moment');
-const MagicLink = require('./helpers/magiclink');
+
 const email = ARGS.email;
 const status = ARGS.status;
 const token = ARGS.token
+
 const { users, data } = server();
 
 const hasExpired = (valid_until) => {
