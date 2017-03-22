@@ -42,7 +42,10 @@ const createMagicLink = () => {
     email
   }
   data.magiclink.create(link)
-  .then(()=>{})
+  .then(link => {
+    const sendTo = link.email;
+    sendEmail(sendTo, link.link);
+  })
   .catch(err => {
     setResponse(new HttpResponse(200, JSON.stringify(err), 'application/json'));
   });

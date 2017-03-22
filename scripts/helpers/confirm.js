@@ -5,7 +5,7 @@ const verify = (email, token) => {
 	socket.post('magiclink/verify', {
 			email,
       token,
-			status: 'allow'
+			status: 'disallow'
 		}).then(data => {
 			console.log('success');
 		}).catch(err => {

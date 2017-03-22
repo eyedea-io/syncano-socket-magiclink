@@ -40,8 +40,27 @@ classes:
     - name: valid_until
       type: string
 endpoints:
+  verify:
+    description: "Socket used to verify user login"
+    file: scripts/verify.js
+    parameters:
+      email:
+        type: string
+        description: "user email"
+        example: "johndoe@foe.com"
+    response:
+      mimetype: application/json
+      examples:
+        -
+          exit_code: 202
+          description: Success
+          example: ""
+        -
+          exit_code: 401
+          description: Failed
+          example: "Unauthorized"
   login:
-    description:
+    description: Socket used to login/create user account
     file: scripts/login.js
     parameters:
       email:
@@ -60,7 +79,7 @@ endpoints:
           description: Failed
           example: No email or status provided
   confirm:
-    description: "Socket used to verify user token inside database"
+    description: "Socket used to confirm user link click"
     file: scripts/confirm.js
     parameters:
       token:

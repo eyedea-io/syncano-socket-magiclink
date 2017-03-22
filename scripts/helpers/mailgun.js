@@ -21,6 +21,9 @@ module.exports = {
     Follow this <a href="${link}"> link </a> to verify your email address.
     `
   }
-  request.post(baseUrl, {form: message}, function(err,httpResponse,body){ if(err) console.error(err); console.log(body)});
+  request.post(baseUrl, {form: message}, function(err,httpResponse,body){
+    if(err) console.error(err);
+    console.log(body)
+  });
   }
 }

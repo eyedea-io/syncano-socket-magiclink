@@ -2,8 +2,6 @@ const server = require('syncano-server').default;
 const moment = require('moment');
 
 const email = ARGS.email;
-const status = ARGS.status;
-const token = ARGS.token
 
 const { users, data } = server();
 
@@ -22,26 +20,20 @@ const hasExpired = (valid_until) => {
 }
 
 users.where('username', 'eq', email)
-	.firstOrFail()
-	.then(user => {
+  .firstOrFail()
+  .then(user => {
     data.magiclink.where('email', email)
       .firstOrFail()
       .then(link => {
         const _link = link;
-        if(!hasExpired(_link.valid_until) && token === _link.token){
-          data.magiclink.update(_link.id, {
-            status: 'allow',
-          }).then(data => {
-            setResponse(new HttpResponse(200, 'Logged in, you can close this window now.', 'application/json'));
-          }).catch(err => {
-            console.log(err);
-          })
+        if(_link.status === 'allow' && !hasExpired(_link.valid_until) ){
+          setResponse(new HttpResponse(201, JSON.stringify(user.user_key), 'application/json'));
         } else {
-          setResponse(new HttpResponse(400,
-            JSON.stringify({message: 'Link has expired or you provided invalid token'}),
-            'application/json'));
+          setResponse(new HttpResponse(201, JSON.stringify('invalid'), 'application/json'));
         }
-      });
-	}).catch(err =>{
-		setResponse(new HttpResponse(400, JSON.stringify(err), 'application/json'));
-	})
+      })
+    })
+      .catch(err => {
+        console.log(err);
+    setResponse(new HttpResponse(400, JSON.stringify({message: 'No such user'}), 'application/json'));
+  })
