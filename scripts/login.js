@@ -20,7 +20,8 @@ const updateMagicLink = (_email) => {
         link: magiclink.generateLink(META.instance),
         valid_until: magiclink.getValid(),
         token: magiclink.getToken(),
-        email
+        email,
+        status: 'disallow'
       }
       data.magiclink.update(_link.id, linkUpdate).then(link => {
         const { email } = link;
@@ -45,9 +46,11 @@ const createMagicLink = () => {
   .then(link => {
     const sendTo = link.email;
     sendEmail(sendTo, link.link);
+    setResponse(new HttpResponse(201, JSON.stringify({status: 'true'}), 'application/json'));
+
   })
   .catch(err => {
-    setResponse(new HttpResponse(200, JSON.stringify(err), 'application/json'));
+    setResponse(new HttpResponse(400, JSON.stringify(err), 'application/json'));
   });
 }
 
@@ -55,6 +58,9 @@ const createUser = () => {
   users.create({
       username: email,
       password: magiclink.getToken(),
+      isVolunteer: ARGS.isVolunteer,
+      firstname: ARGS.firstname,
+      lastname: ARGS.lastname
     }).then(createMagicLink).catch(err => {
       setResponse(new HttpResponse(400, JSON.stringify(err), 'application/json'));
     });

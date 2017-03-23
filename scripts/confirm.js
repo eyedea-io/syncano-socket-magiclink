@@ -38,7 +38,7 @@ users.where('username', 'eq', email)
           })
         } else {
           setResponse(new HttpResponse(400,
-            JSON.stringify({message: 'Link has expired or you provided invalid token'}),
+            JSON.stringify({status: 'false', message: 'Link has expired or you provided invalid token'}),
             'application/json'));
         }
       });

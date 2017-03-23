@@ -15,14 +15,14 @@ classes:
     - name: email
       type: string
 
-    - name: token
+    - name: firstname
       type: string
 
-    - name: status
+    - name: lastname
       type: string
 
-    - name: link
-      type: text
+    - name: isVolunteer
+      type: boolean
   magiclink:
     - name: email
       type: string
@@ -56,7 +56,7 @@ endpoints:
           description: Success
           example: ""
         -
-          exit_code: 401
+          exit_code: 403
           description: Failed
           example: "Unauthorized"
   login:

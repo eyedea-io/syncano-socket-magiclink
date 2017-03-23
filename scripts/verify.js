@@ -18,7 +18,6 @@ const hasExpired = (valid_until) => {
       return false;
     }
 }
-
 users.where('username', 'eq', email)
   .firstOrFail()
   .then(user => {
@@ -27,13 +26,13 @@ users.where('username', 'eq', email)
       .then(link => {
         const _link = link;
         if(_link.status === 'allow' && !hasExpired(_link.valid_until) ){
-          setResponse(new HttpResponse(201, JSON.stringify(user.user_key), 'application/json'));
+          setResponse(new HttpResponse(201, JSON.stringify({status: 'true', userKey: user.user_key, id: user.id}), 'application/json'));
         } else {
-          setResponse(new HttpResponse(201, JSON.stringify('invalid'), 'application/json'));
+          setResponse(new HttpResponse(403, JSON.stringify({message: 'Waiting for link confirm.'}), 'application/json'));
         }
       })
     })
       .catch(err => {
         console.log(err);
-    setResponse(new HttpResponse(400, JSON.stringify({message: 'No such user'}), 'application/json'));
+    setResponse(new HttpResponse(400, JSON.stringify({status: 'false', message: 'No such user'}), 'application/json'));
   })
