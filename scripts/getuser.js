@@ -22,22 +22,4 @@ users.list().then(user => {
   });
 }).catch(err => {
   console.log(err);
-})
-// users.where('user_key', 'eq', userKey)
-//   .firstOrFail()
-//   .then(user => {
-//     const { user_key, id, firstname, lastname, isVolunteer, email } = user;
-//     const userData = {
-//       userKey: user_key,
-//       id,
-//       firstname,
-//       lastname,
-//       isVolunteer,
-//       email
-//     }
-//     setResponse(new HttpResponse(201, JSON.stringify({status: 'true', userData }), 'application/json'));
-//     })
-//   .catch(err => {
-//         console.log(err);
-//     setResponse(new HttpResponse(400, JSON.stringify({status: 'false', message: 'No such user'}), 'application/json'));
-//   })
+});
