@@ -24,6 +24,7 @@ module.exports = {
   request.post(baseUrl, {form: message}, function(err,httpResponse,body){
     if(err) console.error(err);
     console.log(body)
+    setResponse(new HttpResponse(201, JSON.stringify({status: 'true', message: 'Check your email!' }), 'application/json'));
   });
   }
 }

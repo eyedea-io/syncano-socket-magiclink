@@ -1,6 +1,7 @@
 const server = require('syncano-server').default;
 
 const { socket } = server();
+
 const verify = (email, token) => {
 	socket.post('magiclink/verify', {
 			email,

@@ -26,7 +26,16 @@ users.where('username', 'eq', email)
       .then(link => {
         const _link = link;
         if(_link.status === 'allow' && !hasExpired(_link.valid_until) ){
-          setResponse(new HttpResponse(201, JSON.stringify({status: 'true', userKey: user.user_key, id: user.id}), 'application/json'));
+          const { user_key, id, firstname, lastname, isVolunteer, email } = user;
+          const userData = {
+            userKey: user_key,
+            id,
+            firstname,
+            lastname,
+            isVolunteer,
+            email
+          }
+          setResponse(new HttpResponse(201, JSON.stringify({status: 'true', userData }), 'application/json'));
         } else {
           setResponse(new HttpResponse(403, JSON.stringify({message: 'Waiting for link confirm.'}), 'application/json'));
         }

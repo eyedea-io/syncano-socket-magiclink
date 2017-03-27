@@ -41,7 +41,7 @@ classes:
       type: string
 endpoints:
   verify:
-    description: "Socket used to verify user login"
+    description: "Endpoint used to verify user login"
     file: scripts/verify.js
     parameters:
       email:
@@ -54,13 +54,21 @@ endpoints:
         -
           exit_code: 202
           description: Success
-          example: ""
+          example: |
+            userData {
+              userKey,
+              id,
+              firstname,
+              lastname,
+              isVolunteer,
+              email
+            }
         -
           exit_code: 403
           description: Failed
           example: "Unauthorized"
   login:
-    description: Socket used to login/create user account
+    description: Endpoint used to login/create user account
     file: scripts/login.js
     parameters:
       email:
@@ -79,7 +87,7 @@ endpoints:
           description: Failed
           example: No email or status provided
   confirm:
-    description: "Socket used to confirm user link click"
+    description: "Endpoint used to confirm user link click"
     file: scripts/confirm.js
     parameters:
       token:
@@ -101,5 +109,22 @@ endpoints:
           exit_code: 400
           description: Failed
           example: Something went wrong
-
-
+  getuser:
+    description: "Endpoint used to confirm user link click"
+    file: scripts/getuser.js
+    parameters:
+      userkey:
+        type: string
+        description: "user key"
+        example: "4fdasf#$#()adsczx"
+    response:
+      mimetype: application/json
+      examples:
+        -
+          exit_code: 200
+          description: Success
+          example: "user data"
+        -
+          exit_code: 400
+          description: Failed
+          example: Wrong user key
