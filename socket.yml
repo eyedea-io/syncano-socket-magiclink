@@ -42,7 +42,7 @@ classes:
 endpoints:
   verify:
     description: "Endpoint used to verify user login"
-    file: scripts/verify.js
+    file: src/verify.js
     parameters:
       email:
         type: string
@@ -69,7 +69,7 @@ endpoints:
           example: "Unauthorized"
   login:
     description: Endpoint used to login/create user account
-    file: scripts/login.js
+    file: src/login.js
     parameters:
       email:
         type: string
@@ -88,7 +88,7 @@ endpoints:
           example: No email or status provided
   confirm:
     description: "Endpoint used to confirm user link click"
-    file: scripts/confirm.js
+    file: src/confirm.js
     parameters:
       token:
         type: string
@@ -111,7 +111,7 @@ endpoints:
           example: Something went wrong
   getuser:
     description: "Endpoint used to confirm user link click"
-    file: scripts/getuser.js
+    file: src/getuser.js
     parameters:
       userkey:
         type: string
