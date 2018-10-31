@@ -1,11 +1,13 @@
 {
-  "name": "Magic link",
-  "version": "0.0.2",
-  "license": "MIT",
-  "author": "Syncano",
+  "name": "@eyedea-sockets/magiclink",
+  "version": "0.0.1",
+  "description": "Syncano Socket for generating magic links for users",
+  "repository": "https://github.com/eyedea-io/syncano-socket-magiclink.git",
+  "public": true,
+  "author": "Eyedea <hello@eyedea.io> https://eyedea.io",
   "dependencies": {
     "@syncano/core": "latest",
-    "mailgun-js": "^0.8.2",
+    "mailgun-js": "^0.22.0",
     "moment": "^2.17.1"
   },
   "scripts": {
