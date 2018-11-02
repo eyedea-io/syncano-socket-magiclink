@@ -1,10 +1,6 @@
 name: magiclink
-<<<<<<< HEAD
 description: Syncano Socket for generating magic links for users
 runtime: nodejs_v8
-=======
-description: Description of magiclink
->>>>>>> e5ec7b299b0f3f6a6527a309534c158ed05fb4e3
 
 config:
   MAILGUN_API_KEY:
@@ -15,28 +11,12 @@ config:
 
   FROM:
     required: true
-<<<<<<< HEAD
 
 classes:
   user:
     - name: email
       type: string
 
-=======
-classes:
-  user_profile:
-    - name: email
-      type: string
-
-    - name: firstname
-      type: string
-
-    - name: lastname
-      type: string
-
-    - name: isVolunteer
-      type: boolean
->>>>>>> e5ec7b299b0f3f6a6527a309534c158ed05fb4e3
   magiclink:
     - name: email
       type: string
@@ -53,27 +33,24 @@ classes:
 
     - name: valid_until
       type: string
-<<<<<<< HEAD
 
 endpoints:
   verify:
     description: "Endpoint used to verify user login"
-=======
-endpoints:
-  verify:
-    description: "Endpoint used to verify user login"
-    file: src/verify.js
->>>>>>> e5ec7b299b0f3f6a6527a309534c158ed05fb4e3
     parameters:
       email:
         type: string
         description: "user email"
         example: "johndoe@foe.com"
+      token: 
+        type: string
+        description: "magic link token"
+        example: "4fdasf#$#()adsczx"
     response:
       mimetype: application/json
       examples:
         -
-          exit_code: 202
+          exit_code: 200
           description: Success
           example: |
             userData {
@@ -88,12 +65,8 @@ endpoints:
           exit_code: 403
           description: Failed
           example: "Unauthorized"
-  login:
+  generate:
     description: Endpoint used to login/create user account
-<<<<<<< HEAD
-=======
-    file: src/login.js
->>>>>>> e5ec7b299b0f3f6a6527a309534c158ed05fb4e3
     parameters:
       email:
         type: string
@@ -112,10 +85,6 @@ endpoints:
           example: No email or status provided
   confirm:
     description: "Endpoint used to confirm user link click"
-<<<<<<< HEAD
-=======
-    file: src/confirm.js
->>>>>>> e5ec7b299b0f3f6a6527a309534c158ed05fb4e3
     parameters:
       token:
         type: string
@@ -138,10 +107,6 @@ endpoints:
           example: Something went wrong
   getuser:
     description: "Endpoint used to confirm user link click"
-<<<<<<< HEAD
-=======
-    file: src/getuser.js
->>>>>>> e5ec7b299b0f3f6a6527a309534c158ed05fb4e3
     parameters:
       userkey:
         type: string
