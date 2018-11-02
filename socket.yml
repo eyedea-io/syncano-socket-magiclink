@@ -1,0 +1,121 @@
+name: magiclink
+description: Syncano Socket for generating magic links for users
+runtime: nodejs_v8
+
+config:
+  MAILGUN_API_KEY:
+    required: true
+
+  MAILGUN_DOMAIN_NAME:
+    required: true
+
+  FROM:
+    required: true
+
+classes:
+  user:
+    - name: email
+      type: string
+
+  magiclink:
+    - name: email
+      type: string
+      filter_index: true
+
+    - name: token
+      type: string
+
+    - name: status
+      type: string
+
+    - name: link
+      type: text
+
+    - name: valid_until
+      type: string
+
+endpoints:
+  verify:
+    description: "Endpoint used to verify user login"
+    parameters:
+      email:
+        type: string
+        description: "user email"
+        example: "johndoe@foe.com"
+    response:
+      mimetype: application/json
+      examples:
+        -
+          exit_code: 202
+          description: Success
+          example: |
+            userData {
+              userKey,
+              id,
+              firstname,
+              lastname,
+              isVolunteer,
+              email
+            }
+        -
+          exit_code: 403
+          description: Failed
+          example: "Unauthorized"
+  login:
+    description: Endpoint used to login/create user account
+    parameters:
+      email:
+        type: string
+        description: "Email to login user"
+        example: "jon.doe@doe.com"
+    response:
+      mimetype: text/plain
+      examples:
+        -
+          exit_code: 200
+          description: Success
+          example: "Waiting for magiclink"
+        -
+          exit_code: 400
+          description: Failed
+          example: No email or status provided
+  confirm:
+    description: "Endpoint used to confirm user link click"
+    parameters:
+      token:
+        type: string
+        description: "user uid"
+        example: "4fdasf#$#()adsczx"
+      status:
+        type: string
+        description: "status of user login"
+        example: "allow/disallow"
+    response:
+      mimetype: application/json
+      examples:
+        -
+          exit_code: 200
+          description: Success
+          example: "https://magiclink.com/?email=joe.doe@doe.com&uid=dsakjd!@dkjJKSsda$$#12&status=allow"
+        -
+          exit_code: 400
+          description: Failed
+          example: Something went wrong
+  getuser:
+    description: "Endpoint used to confirm user link click"
+    parameters:
+      userkey:
+        type: string
+        description: "user key"
+        example: "4fdasf#$#()adsczx"
+    response:
+      mimetype: application/json
+      examples:
+        -
+          exit_code: 200
+          description: Success
+          example: "user data"
+        -
+          exit_code: 400
+          description: Failed
+          example: Wrong user key
