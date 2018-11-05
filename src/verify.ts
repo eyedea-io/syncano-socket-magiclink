@@ -10,21 +10,21 @@ class Verify extends S.Endpoint {
     {response, data}: S.Core,
     {args}: S.Context<Args>
   ) {
-    data.magiclink.where(['email', args.email], ['token', args.token]).where
+    data.magiclink.where([['email', args.email], ['token', args.token]])
     .firstOrFail()
     .then(link => {
       const currentDate = new Date()
-      if (currentDate > link.validUntil) {
+      if (currentDate < new Date(link.validUntil)) {
         response.json({
           'message': 'Token is valid',
           'email': link.email,
           'token': link.token,
         }, 200)
       } else  {
-        response.json({'message': 'Token expired'}, 400)
+        response.json({'message': 'Token expired'}, 403)
       }
     }).catch(err => {
-      response.json({'message': 'There is no magic link for given arguments.'}, 400)
+      response.json({'message': 'There is no magic link for given arguments.'}, 403)
     })
   }
 
