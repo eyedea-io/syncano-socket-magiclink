@@ -24,15 +24,10 @@ classes:
 
     - name: token
       type: string
+      filter_index: true
 
-    - name: status
-      type: string
-
-    - name: link
-      type: text
-
-    - name: valid_until
-      type: string
+    - name: validUntil
+      type: datetime
 
 endpoints:
   verify:
