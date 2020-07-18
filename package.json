@@ -6,7 +6,7 @@
     "mailgun-js": "^0.8.2",
     "moment": "^2.17.1",
     "rand-token": "^0.3.0",
-    "request": "^2.81.0",
+    "request": "^2.88.0",
     "syncano-server": "^0.7.2-34"
   }
 }
