@@ -1,0 +1,85 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - mailgun-js > proxy-agent > debug:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > http-proxy-agent > debug:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > https-proxy-agent > debug:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > debug:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > http-proxy-agent > debug:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > https-proxy-agent > debug:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > get-uri > debug:
+        patched: '2022-10-05T20:56:16.207Z'
+  'npm:extend:20180424':
+    - agent-base > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - request > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > agent-base > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > http-proxy-agent > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > https-proxy-agent > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > socks-proxy-agent > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > http-proxy-agent > agent-base > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > https-proxy-agent > agent-base > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > socks-proxy-agent > agent-base > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > agent-base > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > http-proxy-agent > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > https-proxy-agent > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > get-uri > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > socks-proxy-agent > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > http-proxy-agent > agent-base > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > https-proxy-agent > agent-base > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > socks-proxy-agent > agent-base > extend:
+        patched: '2022-10-05T20:56:16.207Z'
+  SNYK-JS-LODASH-567746:
+    - async > lodash:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > async > lodash:
+        patched: '2022-10-05T20:56:16.207Z'
+  'npm:ms:20170412':
+    - mailgun-js > proxy-agent > debug > ms:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > http-proxy-agent > debug > ms:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > https-proxy-agent > debug > ms:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > debug > ms:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > http-proxy-agent > debug > ms:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > https-proxy-agent > debug > ms:
+        patched: '2022-10-05T20:56:16.207Z'
+    - mailgun-js > proxy-agent > pac-proxy-agent > get-uri > debug > ms:
+        patched: '2022-10-05T20:56:16.207Z'
+  'npm:stringstream:20180511':
+    - request > stringstream:
+        patched: '2022-10-05T20:56:16.207Z'
+  'npm:tough-cookie:20170905':
+    - request > tough-cookie:
+        patched: '2022-10-05T20:56:16.207Z'

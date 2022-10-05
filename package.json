@@ -1,12 +1,18 @@
 {
   "dependencies": {
     "agent-base": "^2.0.1",
-    "async": "^2.1.5",
+    "async": "^2.6.4",
     "consolidate": "^0.14.5",
-    "mailgun-js": "^0.8.2",
-    "moment": "^2.17.1",
+    "mailgun-js": "^0.17.0",
+    "moment": "^2.29.2",
     "rand-token": "^0.3.0",
-    "request": "^2.81.0",
-    "syncano-server": "^0.7.2-34"
-  }
+    "request": "^2.88.0",
+    "syncano-server": "^0.8.1",
+    "@snyk/protect": "latest"
+  },
+  "scripts": {
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
+  },
+  "snyk": true
 }
