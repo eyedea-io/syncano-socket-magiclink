@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "agent-base": "^2.0.1",
+    "agent-base": "^4.0.0",
     "async": "^2.1.5",
     "consolidate": "^0.14.5",
     "mailgun-js": "^0.8.2",
